@@ -129,16 +129,39 @@ class Radio(object):
                 self.draw(on=False)
                 yield power
 
+            bolt = Lightning(self.env, self.screen,
+                             self.center, self.battery.center)
+            self.env.process(bolt.run())
+
             self.draw(on=True)
             yield self.env.timeout(20)
 
     def draw(self, on=False):
         color = dim_color(self.color, 1 if on else 0.25)
 
-        pygame.draw.line(self.screen, color, self.center,
-                         self.battery.center, 2)
+#        pygame.draw.line(self.screen, color, self.center,
+#                         self.battery.center, 2)
         pygame.draw.circle(self.screen, color, self.center, 20, 0)
 
+
+class Lightning(object):
+
+    def __init__(self, env, screen, source, dest):
+        self.screen = screen
+        self.source = source
+        self.dest = dest
+        self.env = env
+        self.color = BLUE
+
+    def run(self):
+        print('firing lightning')
+        for i in xrange(0, 10):
+            self.draw()
+            yield self.env.timeout(0.5)
+
+    def draw(self):
+        pygame.draw.lines(self.screen, self.color, True,
+                          [self.source, self.dest], 3)
 
 pygame.init()
 
@@ -154,7 +177,7 @@ generator = Generator(env, screen, GREEN, (80, 80), fuel, battery)
 radio = Radio(env, screen, YELLOW, (20, 160), battery)
 
 for x in [generator, radio]:
-    env.process(x)
+    env.process(x.run())
 
 monitor = PyGameMonitor(env, on_closed.succeed, screen)
 trace(env, monitor.pre_step, monitor.post_step)
