@@ -1,2 +1,2 @@
-pygame==1.9.2
-simpy==3.0.10
+sphinx
+sphinx_rtd_theme

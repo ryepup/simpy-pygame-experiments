@@ -1,3 +1,5 @@
 venv
 .vscode
 *.pyc
+docs/_build
+/*.egg-info

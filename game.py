@@ -1,6 +1,6 @@
 import pygame
 import simpy
-from simpygame import (PyGameEnvironment, Renderer)
+from simpygame.core import (PyGameEnvironment, Renderer)
 
 
 def dim_color(color, percent):
@@ -26,7 +26,6 @@ class Generator(object):
         self.env = env
         self.color = color
 
-        env.renderer.add(self)
         self.on = False
 
     def run(self):
@@ -59,7 +58,6 @@ class Radio(object):
         self.env = env
         self.color = color
 
-        env.renderer.add(self)
         self.on = False
 
     def run(self):
@@ -136,6 +134,7 @@ radio = Radio(env, YELLOW, (20, 160), battery)
 
 
 for x in [generator, radio]:
+    renderer.add(x)
     env.process(x.run())
 
 env.run()
