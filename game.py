@@ -34,7 +34,7 @@ class Generator(object):
             if self.battery.level < self.battery.capacity / 3:
                 self.on = True
                 yield self.tank.get(10)
-                for i in xrange(10):
+                for i in range(10):
                     yield self.env.timeout(12)
                     yield self.battery.put(40)
 
@@ -92,7 +92,7 @@ class Lightning(object):
         self.color = BLUE
 
     def run(self):
-        for i in xrange(0, 10):
+        for i in range(0, 10):
             self.draw()
             yield self.env.timeout(0.5)
 
@@ -109,7 +109,7 @@ class CircleContainerRenderer(object):
         self.container = container
 
     def __call__(self, screen):
-        pct = self.container.level / float(self.container.capacity)
+        pct = self.container.level / self.container.capacity
         pygame.draw.circle(screen, self.color, self.center, int(20 * pct), 0)
 
 

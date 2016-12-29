@@ -7,7 +7,7 @@ BLACK = pygame.Color(0, 0, 0)
 class PyGameEnvironment(RealtimeEnvironment):
 
     def __init__(self, renderer, fps=30, *args, **kwargs):
-        super(PyGameEnvironment, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.on_pygame_quit = self.event()
         self.renderer = renderer
@@ -31,7 +31,7 @@ class PyGameEnvironment(RealtimeEnvironment):
         return any(quit_events)
 
     def run(self):
-        super(PyGameEnvironment, self).run(until=self.on_pygame_quit)
+        super().run(until=self.on_pygame_quit)
 
 
 class Renderer(object):
