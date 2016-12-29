@@ -6,5 +6,5 @@
 .. autoclass:: PyGameEnvironment
     :members:
 
-.. autoclass:: Renderer
+.. autoclass:: FrameRenderer
     :members:

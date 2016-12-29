@@ -1,6 +1,6 @@
 import pygame
 import simpy
-from simpygame.core import (PyGameEnvironment, Renderer)
+from simpygame.core import (PyGameEnvironment, FrameRenderer)
 
 
 def dim_color(color, percent):
@@ -117,7 +117,7 @@ size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
 screen.fill(BLACK)
 
-renderer = Renderer(screen)
+renderer = FrameRenderer(screen)
 
 env = PyGameEnvironment(renderer, factor=0.001, strict=False)
 

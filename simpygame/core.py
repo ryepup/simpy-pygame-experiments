@@ -8,7 +8,7 @@ class PyGameEnvironment(RealtimeEnvironment):
     maintain a steady framerate.
 
     :param renderer: what we use to draw the simulation
-    :type renderer: :class:`~simpygame.core.Renderer`
+    :type renderer: :class:`~simpygame.core.FrameRenderer`
     :param fps: intended frames per second
     :param args: other arguments passed blindly to ``simpy.rt.RealtimeEnvironment``
     :param kwargs: other arguments passed blindly to ``simpy.rt.RealtimeEnvironment``
@@ -43,7 +43,7 @@ class PyGameEnvironment(RealtimeEnvironment):
         super().run(until=self._on_pygame_quit)
 
 
-class Renderer(object):
+class FrameRenderer(object):
     """
     Renders the state of the simulation to a ``pygame`` display.
 
@@ -57,8 +57,8 @@ class Renderer(object):
 
     def render(self):
         """
-        Fills the screen with black, then calls all draw functions, then updates
-        the screen with ``pygame.display.flip``.
+        Fills the screen with *fill_color*, then calls all draw functions, then
+        updates the screen with ``pygame.display.flip``.
         """
         self._screen.fill(self._fill_color)
         for draw in self._callbacks:
