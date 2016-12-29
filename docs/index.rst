@@ -10,6 +10,7 @@ Welcome to Simpygame's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   getting-started
    api/index
 
 
